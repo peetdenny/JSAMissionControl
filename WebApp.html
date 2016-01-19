@@ -1,0 +1,39 @@
+<head>
+  <title>WebApp</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Rockets</h1>
+            <form class="new-rocket">
+                <input type="text" name="name" placeholder="My rocket name">
+                <input type="text" name="mass" placeholder="Weight in grams">
+                <input type="text" name="class" placeholder="Motor Class">
+                <input type="text" name="thrust" placeholder="Thrust in newtons"><br/>
+                <textarea name="construction" placeholder="Describe how your rocket was built"></textarea><br/>
+                <input type="submit" value="submit">
+            </form>
+        </header>
+        <ul>
+        {{#each rockets}}
+            {{ >rocket}}
+        {{/each}}
+        </ul>
+    </div>
+</body>
+
+<template name="rocket">
+    <div class="rocket-container">
+        <li>
+                <p><button class="delete" datatoggle="tooltip" title="delete">x</button></p>
+                <p>Name: {{ name }}</p>
+                <p>Weight: {{ mass }} grams</p>
+                <p>Motor Class: {{ class }}</p>
+                <p>Thrust: {{thrust}} Newtons</p>
+                <p>Construction: {{construction}} </p>
+
+
+        </li>
+    </div>
+</template>
