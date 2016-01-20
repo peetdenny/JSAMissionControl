@@ -13,28 +13,20 @@ if (Meteor.isClient) {
 
     Template.body.events({
         'submit .new-rocket': function(event){
-            Rockets.insert({
-                name: event.target.name.value,
-                mass: event.target.mass.value,
-                class: event.target.class.value,
-                thrust: event.target.thrust.value,
-                construction: event.target.construction.value,
-                createAt: new Date()
-            });
-
-            event.target.name.value = "";
-            event.target.mass.value = "";
-            event.target.class.value = "";
-            event.target.thrust.value = "";
-            event.target.construction.value = "";
-
+            var form = event.target;
+            Meteor.call("addRocket", form.name.value, form.mass.value, form.class.value, form.thrust.value, form.construction.value );
+           form.name.value = "";
+           form.mass.value = "";
+           form.class.value = "";
+           form.thrust.value = "";
+           form.construction.value = "";
             return false;
         }
     });
 
     Template.rocket.events({
         'click .delete': function(){
-            Rockets.remove(this._id);
+            Meteor.call("deleteRocket",this._id);
         }
     });
 }
@@ -44,3 +36,21 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 }
+
+
+Meteor.methods({
+    addRocket: function(name, mass, clazz, thrust, construction){
+        Rockets.insert({
+            name: name,
+            mass: mass,
+            class: clazz,
+            thrust: thrust,
+            construction: construction,
+            createAt: new Date()
+        });
+    },
+
+    deleteRocket: function(id){
+        Rockets.remove(id);
+    }
+});
