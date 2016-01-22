@@ -29,9 +29,10 @@
 <template name="rocket">
     <div class="rocket-container">
         <li>
-                <p><button class="delete" datatoggle="tooltip" title="delete">x</button></p>
+                {{#if isCreator}}<p><button class="delete" datatoggle="tooltip" title="delete">x</button></p>{{/if}}
                 <p>Name: {{ name }}</p>
                 <p>Weight: {{ mass }} grams</p>
+                <p>Owner: {{ user }}</p>
                 <p>Motor Class: {{ class }}</p>
                 <p>Thrust: {{thrust}} Newtons</p>
                 <p>Construction: {{construction}} </p>
